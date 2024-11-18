@@ -51,13 +51,13 @@ int main(int ac, char **av, char **env) {
 					ft_puterr("error: cd: cannot change directory to ", av[1]);
 			}
 		}
-		else if (!av[i] || !strcmp(av[i], ";")) {
+		else if (i && (!av[i] || !strcmp(av[i], ";"))) {
 			if (!fork()) {
 				execute(av, i, tmpFD, env);
 			}
 			waitpid(-1, NULL, 0);
 		}
-		else {
+		else if (i) {
 			if (pipe(pipeFD) < 0) {
 				ft_puterr("error: fatal", NULL);
 				exit(EXIT_FAILURE);
