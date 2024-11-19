@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/wait.h>
 
 int	ft_strlen(char *str) {
 	int i = -1;
@@ -43,7 +44,7 @@ int main(int ac, char **av, char **env) {
 		i = 0;
 		while (av[i] && strcmp(av[i], "|") && strcmp(av[i], ";"))
 			i++;
-		if (!strcmp(av[0], "cd")) {
+		if (av[0] && !strcmp(av[0], "cd")) {
 			if (i != 2)
 				ft_puterr("error: cd: bad arguments", NULL);
 			else {
